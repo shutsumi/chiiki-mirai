@@ -1,0 +1,19 @@
+/* 行き方ページだけの配色: イエローを主役にする(2026-11-20 内海の依頼)
+ * 地域みらい留学のトンマナではイエローは「点で使う」色だが、このページでは面に使う
+ * 黄色の上の文字はネイビーかディープネイビーにして、読みやすさを保つ
+ */
+body { background: #fffbd6; }
+.site-header { background: #ffef35; }
+.site-header .eyebrow { color: #15295a; }
+.site-header h1 { color: #15295a; }
+.site-header .header-lead { color: #15295a; }
+.site-header .header-lead strong { background: #fff; box-shadow: none; padding: 0 4px; border-radius: 4px; }
+.sim-card { background: #fff; border: 2px solid #15295a; }
+.sim-label { color: #15295a; }
+.select { border-color: #15295a; }
+.route-school { color: #15295a; }
+.route-out .route-btn { background: #ffef35; color: #15295a; border: 2px solid #15295a; }
+.route-out .route-btn small { color: #15295a; opacity: .8; }
+.route-out .route-btn:hover, .route-out .route-btn:focus-visible { background: #fff6a0; }
+.route-sub-link { color: #15295a; }
+.site-footer { background: #15295a; }

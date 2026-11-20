@@ -14,3 +14,8 @@ https://shutsumi.github.io/chiiki-mirai/route/
 
 CSS・JS を変えたら、`route/index.html` の `?v=…` の値を上げてから push する(GitHub Pages が最大10分ブラウザに保存させるため)
 利用の記録はしていない
+
+## 配色
+
+このページだけイエローを主役にしている(2026-11-20 内海の判断)、上書きは `route/theme-yellow.css`
+地域みらい留学のトンマナではイエローは点で使う色なので、費用シミュレーター(ネイビー主役)とは見た目が違う
