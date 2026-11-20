@@ -1,0 +1,686 @@
+/* Layout: 1カラム(最大720px)。白地に、区切りたい箇所だけメインカラーの淡色・#F5F5F5・アクセントの淡色を敷く。
+   ブランド指定の配色(白地)に合わせ、ライトテーマ固定のデザインとする。 */
+:root {
+  /* 地域みらい留学のトンマナ(地域みらい留学/トンマナ.md、基準は c-mirai.jp/nyushi/)に合わせた配色 */
+  --main: #1941a0;          /* ネイビー(主色):見出し・ボタン・カードの枠線・番号バッジ */
+  --main-ink: #1941a0;
+  --deep: #15295a;          /* ディープネイビー */
+  --main-tint: #ebf8ff;     /* スカイ:面の背景 */
+  --accent: #ffef35;        /* イエロー:点で使うハイライト */
+  --accent-edge: #ffef35;
+  --accent-tint: #ebf8ff;   /* イエローは広い面に使わないため、淡色の面はスカイにそろえる */
+  --amber: #f6a811;         /* アンバー:小さなラベル */
+  --ink: #333333;           /* 本文 */
+  --ink-sub: #5d6870;       /* 補足文字 */
+  --line: #c9d6ec;          /* 区切り線(ネイビーの淡色) */
+  --soft: #ebf8ff;
+  --paper: #ffffff;
+  --error: #c62828;
+
+  --font-body: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-display: "Zen Maru Gothic", var(--font-body);
+
+  --radius: 10px;           /* カードの角丸は10px、ボタンはピル */
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+h1, h2, h3 { text-wrap: balance; }
+
+button, input, select { font: inherit; color: inherit; }
+
+:focus-visible { outline: 3px solid var(--main); outline-offset: 2px; }
+
+/* ---------- header ---------- */
+.site-header {
+  background: var(--main-tint);
+  border-top: 6px solid var(--main);
+  padding-block: 20px 22px;
+}
+.eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--main-ink);
+}
+.site-header h1 {
+  margin: 2px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 4.6vw, 1.85rem);
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+main.wrap { padding-block: 20px 40px; display: grid; gap: 28px; }
+
+/* ---------- notice ---------- */
+.notice {
+  background: var(--soft);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 0.85rem;
+  color: var(--ink-sub);
+}
+.notice h2 { margin: 0 0 4px; font-size: 0.9rem; color: var(--ink); }
+.notice ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.notice strong { color: var(--ink); }
+
+/* ---------- section titles ---------- */
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+.section-sub { margin: 2px 0 0; font-size: 0.82rem; color: var(--ink-sub); }
+
+/* ---------- mode select ---------- */
+.mode-select { display: grid; gap: 14px; }
+.mode-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.mode-card {
+  display: grid;
+  gap: 6px;
+  text-align: left;
+  padding: 20px 20px 18px;
+  background: var(--paper);
+  border: 2px solid var(--main);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+  min-width: 0;
+}
+.mode-card:hover { background: var(--main-tint); }
+.mode-card:active { transform: translateY(1px); }
+.mode-card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--main-ink);
+}
+.mode-card-title::after { content: " →"; }
+.mode-card-sub { font-size: 0.8rem; line-height: 1.6; color: var(--ink-sub); }
+
+/* ---------- screen ---------- */
+.screen { display: grid; gap: 18px; }
+.screen-head { display: grid; gap: 2px; }
+.back-link {
+  justify-self: start;
+  background: none;
+  border: none;
+  padding: 0 0 6px;
+  font-size: 0.85rem;
+  color: var(--main-ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- form ---------- */
+.form {
+  display: grid;
+  gap: 22px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+.field { margin: 0; padding: 0; border: none; display: grid; gap: 8px; min-width: 0; }
+.field-label { font-weight: 700; font-size: 0.95rem; padding: 0; }
+.field-hint { font-weight: 400; font-size: 0.78rem; color: var(--ink-sub); margin-left: 6px; }
+.field-error { margin: 0; font-size: 0.82rem; color: var(--error); font-weight: 700; }
+
+.select, .picker-search {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  font-size: 1rem;
+}
+.select:focus, .picker-search:focus { border-color: var(--main); }
+
+/* school picker */
+.picker { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.picker-search { border: none; border-bottom: 1px solid var(--line); border-radius: 0; }
+.picker-list { max-height: 280px; overflow-y: auto; background: var(--paper); }
+.pref-group { border-bottom: 1px solid var(--soft); }
+.pref-group > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--soft);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.pref-group > summary::-webkit-details-marker { display: none; }
+.pref-group > summary::after { content: "＋"; color: var(--main-ink); }
+.pref-group[open] > summary::after { content: "－"; }
+.pref-count { font-weight: 400; color: var(--ink-sub); font-size: 0.8rem; margin-left: 4px; }
+.school-option {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 12px 8px 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.school-option:hover { background: var(--main-tint); }
+.school-option input { margin-top: 3px; accent-color: var(--main-ink); flex-shrink: 0; }
+.school-option.is-disabled { color: #9aa3a8; cursor: not-allowed; }
+.picker-empty { padding: 14px 12px; font-size: 0.85rem; color: var(--ink-sub); margin: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 12px;
+  background: var(--main-tint);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  max-width: 100%;
+}
+.chip-text { overflow-wrap: anywhere; }
+.chip button {
+  border: none;
+  background: var(--paper);
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--main-ink);
+  flex-shrink: 0;
+}
+
+/* segmented (宿泊日数・交通手段) / toggles */
+.segmented, .toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+.segment, .toggle { position: relative; cursor: pointer; }
+.segment input, .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.segment span, .toggle span {
+  display: inline-block;
+  min-width: 84px;
+  text-align: center;
+  padding: 9px 16px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  background: var(--paper);
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.segment input:checked + span, .toggle input:checked + span {
+  border-color: var(--main);
+  background: var(--main-tint);
+  color: var(--main-ink);
+}
+.toggle input:checked + span::before { content: "✓ "; }
+.segment input:focus-visible + span, .toggle input:focus-visible + span { outline: 3px solid var(--main); outline-offset: 2px; }
+
+.small-notes { margin: 0; padding-left: 1.1em; font-size: 0.78rem; line-height: 1.65; color: var(--ink-sub); display: grid; gap: 2px; }
+
+.cta {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-bottom: 3px solid var(--accent-edge);
+  border-radius: 999px;
+  background: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.cta:hover { filter: brightness(0.97); }
+.cta:active { transform: translateY(1px); }
+
+/* ---------- result ---------- */
+.result { display: grid; gap: 16px; outline: none; }
+.result-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+
+.school-block {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: grid;
+  gap: 10px;
+}
+.school-block h4 {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+.school-meta { margin: 0; font-size: 0.78rem; color: var(--ink-sub); }
+.school-meta a { color: var(--main-ink); }
+
+.rows { margin: 0; display: grid; }
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  padding: 10px 0;
+  border-top: 1px dashed var(--line);
+  align-items: baseline;
+}
+.row:first-child { border-top: none; }
+.row dt { font-weight: 700; font-size: 0.92rem; }
+.row dd { margin: 0; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.row dd .unit { font-weight: 400; font-size: 0.78rem; color: var(--ink-sub); margin-left: 2px; }
+.row .row-sub { grid-column: 1 / -1; margin: 0; font-size: 0.78rem; color: var(--ink-sub); line-height: 1.6; }
+.row.is-subtotal { border-top: 2px solid var(--line); }
+.row.is-subtotal dt, .row.is-subtotal dd { color: var(--main-ink); }
+.row .ask { color: var(--ink-sub); font-weight: 400; font-size: 0.85rem; white-space: normal; }
+
+.info-box {
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  display: grid;
+  gap: 6px;
+}
+.info-box h4 { margin: 0; font-size: 0.92rem; }
+.info-box ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 0.85rem; line-height: 1.65; }
+.info-box.is-notes { background: var(--soft); }
+.info-box.is-notes li { padding-left: 1em; text-indent: -1em; }
+.info-box.is-notes li::before { content: "・"; }
+
+.info-box.is-checklist { background: var(--main-tint); }
+.info-box.is-checklist h4 { color: var(--main-ink); }
+.info-box.is-checklist li {
+  position: relative;
+  padding-left: 30px;
+}
+/* 項目の印: チェックできるボックスに見えないよう、枠のない青い✓にする */
+.info-box.is-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 2px;
+  top: -0.12em;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--main);
+}
+
+.recalc {
+  justify-self: start;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--main-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  background: var(--soft);
+  padding-block: 18px 28px;
+  font-size: 0.75rem;
+  color: var(--ink-sub);
+}
+.site-footer p { margin: 0; }
+
+.load-error { margin: 0; padding: 14px 18px; border-radius: var(--radius); background: var(--accent-tint); font-size: 0.9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ---------- 交通手段(学校ごと) ---------- */
+.transport-list { display: grid; gap: 10px; }
+.transport-row {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--soft);
+  min-width: 0;
+}
+.transport-school { margin: 0; font-weight: 700; font-size: 0.9rem; line-height: 1.5; }
+.transport-note { margin: 0; font-size: 0.78rem; line-height: 1.6; color: var(--ink-sub); }
+.segmented.is-compact span { min-width: 72px; padding: 6px 12px; font-size: 0.88rem; }
+.segment.is-unavailable { cursor: not-allowed; }
+.segment.is-unavailable span { color: #a3abb0; border-style: dashed; background: var(--paper); }
+.airport-field { margin-top: 6px; }
+.field-hint-block { margin: 0; font-size: 0.78rem; color: var(--ink-sub); }
+
+/* ---------- 結果: 学校ごとの注記 ---------- */
+.school-note { margin: 0; font-size: 0.78rem; color: var(--ink-sub); }
+.row .row-sub strong { color: var(--ink); }
+.info-box.is-notes strong { color: var(--ink); }
+.privacy-note { margin: -10px 0 0; font-size: 0.74rem; color: var(--ink-sub); text-align: center; }
+.transport-choice { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.choice-label { font-size: 0.78rem; font-weight: 700; color: var(--ink-sub); min-width: 4.5em; }
+
+/* ---------- 地図から探す(Googleマイマップの埋め込み) ----------
+   見本(chiiki-mirai-guide/events.html)と同じ形。色はこのサイトの変数に置き換え:
+   --ac → --accent / --ac2 → --accent-edge / --onac → --ink / --line → --line / --surf2 → --soft
+   このサイトのカードには影がないため、--sh(box-shadow)は付けない。 */
+.mapwrap{margin:20px 0 4px}
+.maphead{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.maphead h3{font-size:18px;margin:0}
+.maplink{margin-left:auto;font-size:12.8px;font-weight:700;text-decoration:none;white-space:nowrap;
+ border:1px solid var(--accent);border-radius:999px;padding:7px 16px;color:var(--ink);background:var(--accent)}
+.maplink:hover{background:var(--accent-edge);border-color:var(--accent-edge)}
+@media(max-width:620px){.maplink{margin-left:0}}
+.mapbox{position:relative;width:100%;height:440px;border:1px solid var(--line);border-radius:11px;
+ overflow:hidden;background:var(--soft)}
+.mapbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media(max-width:620px){.mapbox{height:340px}}
+.mapnote{margin-top:8px}
+
+/* ---------- 留学後: 初年度の費用(項目のみ)・月々の生活費(学校ページの明細) ---------- */
+.detail-block { display: grid; gap: 8px; padding-top: 10px; border-top: 1px dashed var(--line); }
+.detail-block h5 { margin: 0; font-size: 0.92rem; }
+.detail-src { font-weight: 400; font-size: 0.78rem; color: var(--ink-sub); }
+.detail-lead { margin: 0; font-size: 0.85rem; line-height: 1.65; }
+.detail-lead a { color: var(--main-ink); }
+.detail-lead .ask { color: var(--ink-sub); }
+.detail-note { margin: 0; font-size: 0.78rem; line-height: 1.65; color: var(--ink-sub); }
+.item-tags { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.item-tags li { font-size: 0.82rem; line-height: 1.5; padding: 4px 10px; border-radius: 999px; background: var(--main-tint); color: var(--main-ink); }
+.detail-block .rows .row dt { font-weight: 400; }
+.detail-block .rows .row.is-subtotal dt { font-weight: 700; }
+.badges { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.badge { font-size: 0.74rem; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
+
+/* ---------- TOP: このシミュレーターでわかること ---------- */
+.intro { display: grid; gap: 8px; font-size: 0.92rem; line-height: 1.8; }
+.intro h2 { margin: 0; font-size: 1.1rem; line-height: 1.5; }
+.intro p { margin: 0; }
+.intro-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.intro-list li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border-left: 4px solid var(--main);
+  background: var(--main-tint);
+  border-radius: 0 8px 8px 0;
+}
+.intro-list strong { color: var(--main-ink); }
+.intro-list span { font-size: 0.85rem; }
+
+/* ---------- 検討時: 結果の前提・考え方のポイント ---------- */
+.result-lead {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: var(--accent-tint);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.info-box.is-points { background: var(--accent-tint); }
+.info-box.is-points ol { margin: 0; padding: 0; list-style: none; counter-reset: pt; display: grid; gap: 10px; font-size: 0.85rem; line-height: 1.65; }
+.info-box.is-points li { counter-increment: pt; position: relative; padding-left: 30px; display: grid; gap: 2px; }
+.info-box.is-points li::before {
+  content: counter(pt);
+  position: absolute; left: 0; top: 1px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: var(--ink);
+  font-weight: 700; font-size: 0.8rem; line-height: 22px; text-align: center;
+}
+
+/* ---------- 留学後: 他に考えておくべき費用 ---------- */
+.other-costs { background: var(--soft); border-color: var(--soft); }
+.other-costs .badge, .other-costs .item-tags li { background: var(--paper); }
+
+/* ---------- 検討時: 地図で選ぶ ---------- */
+.map-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.map-step {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 8px; border: 2px solid var(--line); border-radius: 10px;
+  background: var(--paper); font-weight: 700; font-size: 0.9rem; cursor: pointer; line-height: 1.3;
+}
+.map-step-no {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--line); color: var(--ink); font-size: 0.8rem; flex: none;
+}
+.map-step.is-active { border-color: var(--main); background: var(--main-tint); color: var(--main-ink); }
+.map-step.is-active .map-step-no { background: var(--main); color: #fff; }
+.map-guide { margin: 0 0 8px; font-size: 0.85rem; line-height: 1.6; }
+.map-canvas { position: absolute; inset: 0; }
+.map-fallback { margin: 8px 0 0; font-size: 0.85rem; color: var(--error); }
+
+.map-summary { display: grid; gap: 14px; }
+.summary-item { display: grid; gap: 6px; }
+.summary-item .field-label { margin: 0; }
+.summary-value { margin: 0; font-size: 0.9rem; color: var(--ink-sub); }
+.selected-list { display: grid; gap: 8px; }
+.selected-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft);
+}
+.selected-text { min-width: 0; }
+.selected-name { margin: 0; font-weight: 700; font-size: 0.9rem; line-height: 1.5; }
+.selected-meta { margin: 0; font-size: 0.8rem; color: var(--ink-sub); }
+.selected-actions { display: flex; gap: 6px; flex: none; }
+.selected-actions button {
+  padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper);
+  font-size: 0.8rem; cursor: pointer;
+}
+
+/* 地図の吹き出し(学校のピン) */
+.pop { font-family: var(--font-body); color: var(--ink); display: grid; gap: 4px; min-width: 220px; }
+.pop p, .leaflet-popup-content .pop p { margin: 0; }
+.pop-name { font-weight: 700; font-size: 0.95rem; line-height: 1.45; }
+.pop-meta { font-size: 0.78rem; color: var(--ink-sub); }
+.pop-meta a { color: var(--main-ink); }
+.pop-label { margin-top: 6px !important; font-size: 0.78rem; font-weight: 700; }
+.pop-label span { font-weight: 400; color: var(--ink-sub); }
+.pop-seg { display: flex; gap: 6px; }
+.pop-seg button {
+  flex: 1; padding: 6px 4px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper);
+  font-size: 0.85rem; cursor: pointer; color: var(--ink);
+}
+.pop-seg button[aria-pressed="true"] { border-color: var(--main); background: var(--main); color: #fff; font-weight: 700; }
+.pop-seg button:disabled { color: #a3abb0; border-style: dashed; cursor: not-allowed; background: var(--paper); }
+.pop-note { font-size: 0.74rem; color: var(--ink-sub); line-height: 1.5; }
+.pop-error { font-size: 0.78rem; color: var(--error); }
+.pop-actions { display: grid; gap: 6px; margin-top: 8px; }
+.pop-add {
+  padding: 9px; border: none; border-radius: 999px; background: var(--accent); color: var(--ink);
+  font-weight: 700; font-size: 0.9rem; cursor: pointer;
+}
+.pop-remove { padding: 6px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: 0.8rem; cursor: pointer; }
+
+/* 地理院地図のときの「お住まいの場所」の印 */
+.home-pin span {
+  display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  background: #333333; color: #fff; font-weight: 700; font-size: 12px; border: 2px solid #fff;
+  box-sizing: border-box;
+}
+.pin-panel { position: relative; margin-top: 8px; padding: 12px 14px; border: 2px solid var(--main); border-radius: 11px; background: var(--paper); }
+.pin-panel .pop { padding-right: 24px; }
+.pin-panel-close { position: absolute; top: 6px; right: 8px; border: none; background: none; font-size: 1.2rem; line-height: 1; cursor: pointer; color: var(--ink-sub); padding: 4px; }
+
+/* ===================== v2(2026-11 内海):留学後の費用だけに絞った画面 ===================== */
+main.wrap { display: grid; gap: 22px; padding-block: 18px 36px; }
+.header-lead { margin: 6px 0 0; font-size: 0.95rem; line-height: 1.6; }
+.header-lead strong { color: var(--main-ink); }
+
+/* 入力カード(ファーストビューに置く、電卓のように「選んで押す」だけ) */
+.sim-card {
+  display: grid; gap: 14px;
+  padding: 18px;
+  border: 2px solid var(--main);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--main-tint);
+}
+.sim-step { display: grid; gap: 6px; }
+.sim-label { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; }
+.sim-no {
+  display: inline-grid; place-items: center; flex: none;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--main); color: #fff; font-size: 0.8rem; font-weight: 700;
+}
+.sim-card .select { width: 100%; min-height: 48px; font-size: 1rem; }
+.sim-card .select:disabled { background: var(--soft); color: var(--ink-sub); }
+.sim-foot { margin: 0; font-size: 0.78rem; line-height: 1.7; color: var(--ink-sub); text-align: center; }
+.sim-foot a { color: var(--main-ink); white-space: nowrap; }
+
+/* 結果 */
+.school-name { margin: 0; font-size: 1.15rem; line-height: 1.5; }
+.cost-section { display: grid; gap: 6px; padding-top: 12px; border-top: 2px solid var(--main-tint); }
+.cost-section:first-of-type { border-top: none; padding-top: 0; }
+.cost-section h4 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
+.cost-section h5 { margin: 8px 0 0; font-size: 0.85rem; color: var(--ink-sub); }
+.cost-tag { flex: none; font-size: 0.72rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+.cost-tag.is-monthly { background: var(--main); color: #fff; }
+.cost-tag.is-once { background: var(--accent); color: var(--ink); }
+.cost-tag.is-sometimes { background: var(--soft); color: var(--ink); border: 1px solid var(--line); }
+.row dd .zero { color: var(--main-ink); font-size: 1.05rem; }
+.row .row-sub a { color: var(--main-ink); }
+.more { margin-top: 6px; }
+.more summary { cursor: pointer; color: var(--main-ink); font-size: 0.8rem; }
+.more-list { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 0.8rem; }
+.more-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 10px; color: var(--ink); }
+.more-list small { grid-column: 1 / -1; color: var(--ink-sub); }
+
+.info-box.is-good { background: var(--accent-tint); }
+.info-box.is-good li { padding-left: 1em; text-indent: -1em; }
+.info-box.is-good li::before { content: "・"; }
+.info-box.is-good .school-note { text-indent: 0; padding-left: 0; font-size: 0.8rem; color: var(--ink-sub); }
+.info-box.is-good .school-note::before { content: none; }
+.info-box.is-good .school-note strong { display: block; color: var(--ink); }
+
+.about { display: grid; gap: 8px; }
+.about h2 { margin: 0; font-size: 1rem; }
+.about-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.about-list li { display: grid; gap: 0; padding: 10px 14px; border-radius: 10px; background: var(--main-tint); font-size: 0.85rem; line-height: 1.6; }
+.about-list strong { color: var(--main-ink); }
+
+/* ===================== 地域みらい留学のトンマナに合わせる上書き(2026-11) ===================== */
+body { font-weight: 500; }
+strong { font-weight: 700; }
+.site-header { border-top: none; background: var(--main-tint); }
+.eyebrow { color: var(--main); letter-spacing: 0.1em; }
+.site-header h1 { font-family: var(--font-display); color: var(--main); letter-spacing: 0.1em; }
+.header-lead strong { background: linear-gradient(transparent 60%, var(--accent) 60%); color: var(--ink); }
+h2, h3, h4, h5, .section-title, .school-name, .about h2 { color: var(--main); letter-spacing: 0.1em; }
+.cost-section h5 { color: var(--main); letter-spacing: 0.05em; }
+
+/* カード=白地+ネイビーの細枠+角丸10px+影なし */
+.sim-card { border: 2px solid var(--main); border-radius: var(--radius); box-shadow: none; }
+.school-block { border: 1px solid var(--main); border-radius: var(--radius); }
+.select { border: 1px solid var(--main); border-radius: var(--radius); }
+.sim-no { background: var(--main); }
+.sim-foot { text-align: left; }
+.sim-foot a, .school-meta a, .row .row-sub a, .detail-lead a, .more summary { color: var(--main); }
+
+/* ボタン=ネイビー塗りのピル、白文字 Medium、字間0.1em */
+.cta {
+  background: var(--main); color: #fff;
+  border: none; border-radius: 999px;
+  font-family: var(--font-body); font-weight: 500; letter-spacing: 0.1em;
+}
+.cta:hover { background: var(--deep); filter: none; }
+
+/* ラベル: 毎月=ネイビー、最初だけ=イエロー(点で使う)、年に何回か=アンバー */
+.cost-tag { letter-spacing: 0.05em; }
+.cost-tag.is-monthly { background: var(--main); color: #fff; }
+.cost-tag.is-once { background: var(--accent); color: var(--ink); }
+.cost-tag.is-sometimes { background: var(--amber); color: #fff; border: none; }
+.cost-section { border-top: 1px solid var(--line); }
+.row { border-top: 1px dashed var(--line); }
+.row dd .zero { color: var(--main); }
+.item-tags li { background: var(--main-tint); color: var(--main); }
+
+/* 情報の箱:スカイの面(イエローを広い面に使わない) */
+.info-box.is-good, .info-box.is-checklist { background: var(--paper); border: 1px solid var(--main); }
+.info-box.is-good h4, .info-box.is-checklist h4 { color: var(--main); }
+.notice { background: var(--main-tint); }
+.about-list li { background: var(--main-tint); }
+.about-list strong { color: var(--main); }
+.site-footer { background: var(--main); color: #fff; border-radius: 0; }
+.site-footer p { color: #fff; }
+
+/* 長いURLや学校名で横にはみ出さないようにする */
+.result, .result > *, .school-block > *, .cost-section > *, .rows, .row > * { min-width: 0; }
+.row .row-sub, .detail-note, .more-list, .info-box li { overflow-wrap: anywhere; }
+
+/* 名前が長いので、スマホでは語の途中で切らず「シミュレーター」を次の行へ送る */
+.site-header h1 .h1-tail { display: inline-block; }
+
+/* ---------- 毎月の合計 ---------- */
+.total-box { background: var(--main-tint); border: 1px solid var(--main); border-radius: var(--radius); padding: 14px 16px; margin: 4px 0 16px; }
+.total-label { margin: 0; font-size: .85rem; font-weight: 700; color: var(--main); }
+.total-value { margin: 2px 0 6px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 6.5vw, 2rem); line-height: 1.3; color: var(--main); overflow-wrap: anywhere; }
+.total-value .unit { font-size: .55em; margin-left: 2px; }
+.total-notes { margin: 0; padding-left: 1.1em; font-size: .78rem; color: var(--ink-sub); line-height: 1.6; }
+.total-box.is-na .total-na { margin: 4px 0 0; font-size: .9rem; }
+
+/* ---------- 帰省の交通費: Googleマップで調べるボタン ---------- */
+.route-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; box-sizing: border-box; margin-top: 10px; padding: 12px 18px; border: 2px solid var(--main); border-radius: 999px; background: var(--paper); color: var(--main); font-weight: 700; font-size: .95rem; line-height: 1.4; text-decoration: none; text-align: left; }
+.route-btn svg { flex: none; }
+.route-btn small { display: block; font-size: .72rem; font-weight: 500; color: var(--ink-sub); }
+.route-btn:hover, .route-btn:focus-visible { background: var(--main-tint); }
+.route-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- フッターのリンク ---------- */
+.footer-links { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.site-footer .footer-links a { color: #fff; text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+.site-footer .footer-links a::after { content: " ↗"; font-size: .85em; }
+.site-footer .footer-links a:hover { opacity: .85; }
+
+/* ---------- 入学のときにかかる費用: 項目ごとの金額 ---------- */
+.once-rows .row { padding: 8px 0; }
+.once-rows dt { font-weight: 500; }
+.ask-link { font-size: .85rem; font-weight: 500; color: var(--main); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.ask-link:hover { opacity: .8; }
+
+/* ---------- 費用の大見出し(毎月／最初だけ／年に何回か)をはっきりさせる ---------- */
+.cost-section { gap: 8px; padding-top: 22px; margin-top: 6px; border-top: none; }
+.cost-section:first-of-type { padding-top: 4px; margin-top: 0; }
+.cost-section h4 { margin: 0 0 4px; padding: 10px 14px; border-radius: var(--radius); background: var(--main); color: #fff; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.4; letter-spacing: .06em; gap: 10px; }
+.cost-section h4 .cost-tag { font-size: .78rem; padding: 3px 11px; }
+.cost-section h4 .cost-tag.is-monthly { background: #fff; color: var(--main); }
+@media (max-width: 420px) {
+  .cost-section h4 { font-size: 1.02rem; letter-spacing: .02em; padding: 10px 12px; gap: 8px; }
+  .cost-section h4 .cost-tag { font-size: .72rem; padding: 3px 9px; }
+}
+
+/* ---------- 行き方ページ(route/) ---------- */
+.route-out { display: grid; gap: 8px; padding-top: 4px; }
+.route-school { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--main); }
+.route-out .route-btn { margin-top: 0; background: var(--main); color: #fff; border-color: var(--main); padding: 14px 18px; font-size: 1rem; }
+.route-out .route-btn small { color: rgba(255,255,255,.85); }
+.route-out .route-btn:hover, .route-out .route-btn:focus-visible { background: var(--deep); }
+.route-sub-link { justify-self: center; font-size: .85rem; color: var(--main); text-underline-offset: 3px; }
+.site-footer .footer-links a.is-internal::after { content: ""; }
